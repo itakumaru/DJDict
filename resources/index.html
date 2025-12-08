@@ -1,0 +1,76 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>DJDict</title>
+        <link rel="stylesheet" href="/css/styles.css" />
+        <link
+            rel="stylesheet"
+            href="/css/lib/primeicons@7.0.0/primeicons.min.css"
+        />
+    </head>
+    <body>
+        <script src="/js/lib/vue@3.5.25/vue.global.min.js"></script>
+        <script src="/js/lib/primevue@4.4.1/primevue.min.js"></script>
+        <script src="/js/lib/@primeuix/themes@2.0.0/aura.js"></script>
+        <script src="/js/neutralino.js"></script>
+        <div id="app">
+            <aside>
+                <p-card id="sidebar">
+                    <template #content>
+                        <div id="sidebar-layout">
+                            <div id="search">
+                                <p-iconfield>
+                                    <p-inputtext
+                                        type="text"
+                                        v-model="searchQuery"
+                                        @keyup.enter="getEntry()"
+                                        placeholder="検索"
+                                        fluid
+                                    ></p-inputtext>
+                                    <p-inputicon
+                                        class="pi pi-search"
+                                        @click="getEntry()"
+                                    ></p-inputicon>
+                                </p-iconfield>
+                            </div>
+                            <br />
+                            <div id="history">
+                                <div
+                                    v-for="item in searchHistory"
+                                    class="history-item"
+                                >
+                                    <p-button
+                                        :label="item"
+                                        severity="contrast"
+                                        variant="text"
+                                        class="history-button"
+                                        @click="getEntry(item)"
+                                        fluid
+                                    ></p-button>
+                                    <p-button
+                                        icon="pi pi-times"
+                                        severity="secondary"
+                                        variant="text"
+                                        @click="removeHistory(item)"
+                                    ></p-button>
+                                </div>
+                            </div>
+                            <div id="logo">
+                                <p-divider></p-divider>
+                                <i>
+                                    <b>DJDict</b><br />
+                                    <small>DE-JA-Wörterbuch</small>
+                                </i>
+                            </div>
+                        </div>
+                    </template>
+                </p-card>
+            </aside>
+            <main id="main">
+                <div v-html="result"></div>
+            </main>
+        </div>
+        <script src="/js/main.js"></script>
+    </body>
+</html>
