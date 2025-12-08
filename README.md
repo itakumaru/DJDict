@@ -1,15 +1,3 @@
-# neutralinojs-minimal
+# DJDict
 
-The default template for a Neutralinojs app. It's possible to use your favorite frontend framework by using [these steps](https://neutralino.js.org/docs/getting-started/using-frontend-libraries).
-
-## Contributors
-
-[![Contributors](https://contrib.rocks/image?repo=neutralinojs/neutralinojs-minimal)](https://github.com/neutralinojs/neutralinojs-minimal/graphs/contributors)
-
-## License
-
-[MIT](LICENSE)
-
-## Icon credits
-
-- `trayIcon.png` - Made by [Freepik](https://www.freepik.com) and downloaded from [Flaticon](https://www.flaticon.com)
+Online German-Japanese dictionary powered by Neutralinojs, Vue.js and PrimeVue. It scrapes the dictionary data from プログレッシブ独和辞典 on [コトバンク](https://kotobank.jp/dictionary/pgj/) and caches the data in a local storage once searched for reducing network requests and faster loading times.
