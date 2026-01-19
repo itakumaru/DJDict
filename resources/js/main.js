@@ -15,7 +15,7 @@ const app = createApp({
     // コトバンク該当ページからのスクレイピング
     const getEntry = async (button) => {
       // 入力のフォーマット
-      const replacements = {
+      const replacementsQuery = {
         ä: "a",
         ö: "o",
         ü: "u",
@@ -25,12 +25,28 @@ const app = createApp({
       const word = button || searchQuery.value;
       const formated = word.replace(
         /ä|ö|ü|ß|é/gi,
-        (match) => replacements[match.toLowerCase()],
+        (match) => replacementsQuery[match.toLowerCase()],
+      );
+
+      // キャッシュ用のファイル名
+      const replacementsFileName = {
+        Ä: "Ae",
+        Ö: "Oe",
+        Ü: "Ue",
+        ä: "ae",
+        ö: "oe",
+        ü: "ue",
+        ß: "ss",
+        é: "e",
+      };
+      const fileName = word.replace(
+        /Ä|Ö|Ü|ä|ö|ü|ß|é/gi,
+        (match) => replacementsFileName[match],
       );
 
       // キャッシュがあればそれを表示する
       try {
-        const cache = await Neutralino.storage.getData(formated);
+        const cache = await Neutralino.storage.getData(fileName);
         result.value = cache;
 
         // 履歴に追加
@@ -75,10 +91,7 @@ const app = createApp({
 
           // キャッシュ
           button ||
-            (await Neutralino.storage.setData(
-              searchQuery.value,
-              description.innerHTML,
-            ));
+            (await Neutralino.storage.setData(fileName, description.innerHTML));
         } catch (error) {
           console.error(error);
         }
